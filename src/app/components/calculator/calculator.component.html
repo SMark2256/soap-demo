@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2>{{ title }}</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <div class="form-group mb-3">
+          <label for="firstNumber">First Number:</label>
+          <input
+            type="number"
+            id="firstNumber"
+            class="form-control"
+            formControlName="firstNumber"
+          >
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="operation">Operation:</label>
+          <select
+            id="operation"
+            class="form-control"
+            formControlName="operation"
+          >
+            <option value="add">Addition (+)</option>
+            <option value="subtract">Subtraction (-)</option>
+            <option value="multiply">Multiplication (×)</option>
+            <option value="divide">Division (÷)</option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="secondNumber">Second Number:</label>
+          <input
+            type="number"
+            id="secondNumber"
+            class="form-control"
+            formControlName="secondNumber"
+          >
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="calculate()"
+          [disabled]="calculatorService.loading() || form.invalid"
+        >
+          @if (calculatorService.loading()) {
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          }
+          Calculate
+        </button>
+      </form>
+
+      @if (calculatorService.error()) {
+        <div class="alert alert-danger mt-3">
+          {{ calculatorService.error() }}
+        </div>
+      }
+
+      @if (calculatorService.result() !== null) {
+        <div class="alert alert-success mt-3">
+          <strong>Result:</strong> {{ calculatorService.result() }}
+        </div>
+      }
+
+      @if (calculatorService.lastCalculation()) {
+        <div class="mt-4">
+          <h5>Last Calculation:</h5>
+          <div class="card bg-light">
+            <div class="card-body">
+              <p class="mb-1">
+                {{ calculatorService.lastCalculation()?.firstNumber }}
+                @switch (calculatorService.lastCalculation()?.operation) {
+                  @case ('add') { <span> + </span> }
+                  @case ('subtract') { <span> - </span> }
+                  @case ('multiply') { <span> × </span> }
+                  @case ('divide') { <span> ÷ </span> }
+                }
+                {{ calculatorService.lastCalculation()?.secondNumber }}
+                = {{ calculatorService.result() }}
+              </p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2>World Languages</h2>
+    </div>
+    <div class="card-body">
+      @if (languagesService.loading()) {
+        <div class="text-center my-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-2">Loading languages...</p>
+        </div>
+      }
+
+      @if (languagesService.error()) {
+        <div class="alert alert-danger">
+          {{ languagesService.error() }}
+        </div>
+      }
+
+      @if (languagesService.languages().length > 0 && !languagesService.loading()) {
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+              <span class="input-group-text">Search</span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Filter languages..."
+                [value]="searchTerm()"
+                (input)="updateSearchTerm($event)">
+            </div>
+
+            <div class="list-group languages-list">
+              @for (language of filteredLanguages(); track language.sISOCode) {
+                <button
+                  class="list-group-item list-group-item-action"
+                  [class.active]="languagesService.selectedLanguage()?.sISOCode === language.sISOCode"
+                  (click)="onLanguageSelect(language)">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <strong>{{ language.sName }}</strong>
+                    <span class="badge bg-primary">{{ language.sISOCode }}</span>
+                  </div>
+                </button>
+              }
+
+              @if (filteredLanguages().length === 0) {
+                <div class="alert alert-info mt-2">
+                  No languages match your search.
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            @if (languagesService.selectedLanguage()) {
+              <div class="card">
+                <div class="card-header">
+                  Selected Language
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ languagesService.selectedLanguage()?.sName }}</h5>
+                  <p class="card-text">
+                    <strong>ISO Code:</strong> {{ languagesService.selectedLanguage()?.sISOCode }}
+                  </p>
+                </div>
+              </div>
+            } @else {
+              <div class="alert alert-info">
+                Please select a language from the list to view details.
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      @if (languagesService.languages().length === 0 && !languagesService.loading()) {
+        <div class="alert alert-warning">
+          No languages available. Please try again later.
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,59 +1,138 @@
-# Soap
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+# SOAP API Demó Alkalmazás
 
-## Development server
+Ez a projekt egy SOAP webszolgáltatásokat integráló alkalmazást mutat be Angular (frontend) és NestJS (backend) technológiákkal. Az alkalmazás különböző SOAP szolgáltatásokat használ, beleértve számológép műveleteket, országinformációkat, valuta adatokat és nyelvlistázást.
 
-To start a local development server, run:
+## Funkciók
 
-```bash
-ng serve
-```
+- Számológép alapvető aritmetikai műveletekkel
+- Országinformációs böngésző részletekkel (főváros, valuta, zászló)
+- Valuta listázás és részletek
+- Nyelvek listázása és szűrése
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Előfeltételek
 
-## Code scaffolding
+Mielőtt elkezdenéd, győződj meg róla, hogy a következők telepítve vannak:
+- [Node.js](https://nodejs.org/) (v18 vagy újabb)
+- [npm](https://www.npmjs.com/) (v9 vagy újabb)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Kezdeti lépések
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 1. lépés: Projekt klónozása
 
 ```bash
-ng generate --help
+git clone <repository-url>
+cd soap-demo
 ```
 
-## Building
+### 2. lépés: Backend beállítása
 
-To build the project run:
+1. Navigálj a backend könyvtárba:
+   ```bash
+   cd backend
+   ```
+
+2. Függőségek telepítése:
+   ```bash
+   npm install
+   ```
+
+3. Backend szerver indítása:
+   ```bash
+   npm run start:dev
+   ```
+
+   A backend elérhető lesz a http://localhost:3000 címen
+
+### 3. lépés: Frontend beállítása
+
+1. Nyiss egy új terminált és navigálj a projekt gyökérkönyvtárába
+
+2. Függőségek telepítése:
+   ```bash
+   npm install
+   ```
+
+3. Frontend fejlesztői szerver indítása:
+   ```bash
+   npm start
+   ```
+
+   Az alkalmazás elérhető lesz a http://localhost:4200 címen
+
+## Alkalmazás szerkezete
+
+### Backend (NestJS)
+
+A backend különböző modulokra van osztva, amelyek különböző SOAP szolgáltatásokkal integrálódnak:
+
+- **Calculator Modul**: Kapcsolódik egy számológép SOAP szolgáltatáshoz
+- **Countries Modul**: Országinformációkat szolgáltat egy SOAP szolgáltatásból
+- **Currencies Modul**: Valuta adatokat kér le egy SOAP szolgáltatásból
+- **Languages Modul**: Nyelvi információkat kap egy SOAP szolgáltatásból
+
+### Frontend (Angular)
+
+A frontend Angular-rel készült és komponens alapú architektúrát használ:
+
+- **Calculator Komponens**: Felhasználói felület számítások elvégzéséhez
+- **Countries Komponens**: Felület országinformációk böngészéséhez
+- **Currencies Komponens**: Valuta adatok megjelenítése
+- **Languages Komponens**: Nyelvek listázása és szűrése
+
+## Környezeti konfiguráció
+
+### Backend
+
+A környezeti változók a backend könyvtárban található `.env` fájlban vannak tárolva:
+
+```
+PORT=3000
+HOST=localhost
+ENABLE_CORS=true
+```
+
+Ha nincs `.env` fájl, az alkalmazás alapértelmezetten a localhost:3000 címet használja.
+
+### Frontend (Jelenleg nincs implementálva)
+
+A környezeti konfiguráció a `src/environments` könyvtárban található:
+
+- `environment.ts`: Fejlesztési környezet beállításai
+- `environment.prod.ts`: Éles környezet beállításai
+
+## Éles környezetbe való telepítés
+
+### Backend
 
 ```bash
-ng build
+cd backend
+npm run build
+npm run start:prod
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Frontend
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+A lefordított frontend a `dist/soap` könyvtárban lesz, készen arra, hogy webszerverre telepítsék.
 
-For end-to-end (e2e) testing, run:
+## Hibaelhárítás
 
-```bash
-ng e2e
-```
+### SOAP szolgáltatás kapcsolódási problémák
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Ha problémákat tapasztalsz a SOAP szolgáltatásokhoz való kapcsolódáskor:
 
-## Additional Resources
+1. Ellenőrizd az internetkapcsolatot
+2. Ellenőrizd, hogy a SOAP végpontok elérhetőek-e
+3. Nézd meg a backend naplókat részletes hibaüzenetekért
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### API kapcsolódási problémák
+
+Ha a frontend nem tud kapcsolódni a backendhez:
+
+1. Győződj meg róla, hogy a backend szerver fut
+2. Ellenőrizd, hogy a frontend környezeti konfigurációjában lévő API URL megegyezik a backend URL-jével
+3. Ellenőrizd, hogy a CORS engedélyezve van-e a backenden

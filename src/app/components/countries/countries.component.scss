@@ -1,0 +1,39 @@
+
+:host {
+  .card {
+    margin-bottom: 2rem;
+  }
+
+  .card-header {
+    font-weight: 500;
+  }
+
+  .country-details {
+    h3 {
+      color: var(--primary);
+      border-bottom: 1px solid var(--light);
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .form-select {
+    &:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(var(--primary), 0.25);
+    }
+  }
+
+  .img-fluid {
+    border: 1px solid var(--light);
+    padding: 0.25rem;
+    background-color: white;
+  }
+
+  .col-md-6 .card {
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

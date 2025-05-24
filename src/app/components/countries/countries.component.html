@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2>Countries Information</h2>
+    </div>
+    <div class="card-body">
+      @if (countriesService.loading()) {
+        <div class="text-center my-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-2">Loading data...</p>
+        </div>
+      }
+
+      @if (countriesService.error()) {
+        <div class="alert alert-danger">
+          {{ countriesService.error() }}
+        </div>
+      }
+
+      <div class="form-group mb-4">
+        <label for="countrySelect" class="form-label">Select a country:</label>
+        <select
+          id="countrySelect"
+          class="form-select"
+          (change)="onCountrySelect($event)"
+          [disabled]="countriesService.loading()">
+          <option value="">-- Select a country --</option>
+          @for (country of countriesService.countries(); track country.sISOCode) {
+            <option
+              [value]="country.sISOCode"
+              [selected]="countriesService.selectedCountry() === country.sISOCode">
+              {{ country.sName }} ({{ country.sISOCode }})
+            </option>
+          }
+        </select>
+      </div>
+
+      @if (countriesService.selectedCountry()) {
+                <div class="country-details">
+          <h3 class="mb-3">Country Details</h3>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-header">Capital City</div>
+                <div class="card-body">
+                  @if (countriesService.capitalCity()) {
+                    <p>{{ countriesService.capitalCity() }}</p>
+                  }
+                  @if (!countriesService.capitalCity() && !countriesService.loading()) {
+                    <p class="text-muted">No data available</p>
+                  }
+                  @if (countriesService.loading()) {
+                    <div class="spinner-border spinner-border-sm" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-header">Currency</div>
+                <div class="card-body">
+                  @if (countriesService.currency()) {
+                    <div>
+                      <p><strong>Code:</strong> {{ countriesService.currency()?.code }}</p>
+                      <p><strong>Name:</strong> {{ countriesService.currency()?.name }}</p>
+                    </div>
+                  }
+                  @if (!countriesService.currency() && !countriesService.loading()) {
+                    <p class="text-muted">No data available</p>
+                  }
+                  @if (countriesService.loading()) {
+                    <div class="spinner-border spinner-border-sm" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-header">International Phone Code</div>
+                <div class="card-body">
+                  @if (countriesService.phoneCode()) {
+                    <p>{{ countriesService.phoneCode() }}</p>
+                  }
+                  @if (!countriesService.phoneCode() && !countriesService.loading()) {
+                    <p class="text-muted">No data available</p>
+                  }
+                  @if (countriesService.loading()) {
+                    <div class="spinner-border spinner-border-sm" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-header">Flag</div>
+                <div class="card-body text-center">
+                  @if (countriesService.flagUrl()) {
+                    <img [src]="countriesService.flagUrl()" alt="Country Flag" class="img-fluid" style="max-height: 150px;">
+                  }
+                  @if (!countriesService.flagUrl() && !countriesService.loading()) {
+                    <p class="text-muted">No flag available</p>
+                  }
+                  @if (countriesService.loading()) {
+                    <div class="spinner-border spinner-border-sm" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

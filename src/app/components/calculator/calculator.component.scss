@@ -1,0 +1,32 @@
+:host {
+  .card {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .card-header {
+    padding: 1rem;
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+  }
+
+  .form-group {
+    label {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .alert {
+    margin-top: 1.5rem;
+  }
+}

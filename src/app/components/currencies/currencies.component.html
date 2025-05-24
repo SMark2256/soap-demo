@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2>World Currencies</h2>
+    </div>
+    <div class="card-body">
+      @if (currenciesService.loading()) {
+        <div class="text-center my-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-2">Loading currencies...</p>
+        </div>
+      }
+
+      @if (currenciesService.error()) {
+        <div class="alert alert-danger">
+          {{ currenciesService.error() }}
+        </div>
+      }
+
+      @if (currenciesService.currencies().length > 0 && !currenciesService.loading()) {
+        <div class="row">
+          <div class="col-md-6">
+            <div class="list-group currencies-list">
+              @for (currency of currenciesService.currencies(); track currency.sISOCode) {
+                <button
+                  class="list-group-item list-group-item-action"
+                  [class.active]="currenciesService.selectedCurrency()?.sISOCode === currency.sISOCode"
+                  (click)="onCurrencySelect(currency)">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <strong>{{ currency.sName }}</strong>
+                    <span class="badge bg-primary">{{ currency.sISOCode }}</span>
+                  </div>
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            @if (currenciesService.selectedCurrency()) {
+              <div class="card">
+                <div class="card-header">
+                  Selected Currency
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ currenciesService.selectedCurrency()?.sName }}</h5>
+                  <p class="card-text">
+                    <strong>ISO Code:</strong> {{ currenciesService.selectedCurrency()?.sISOCode }}
+                  </p>
+                </div>
+              </div>
+            } @else {
+              <div class="alert alert-info">
+                Please select a currency from the list to view details.
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      @if (currenciesService.currencies().length === 0 && !currenciesService.loading()) {
+        <div class="alert alert-warning">
+          No currencies available. Please try again later.
+        </div>
+      }
+    </div>
+  </div>
+</div>

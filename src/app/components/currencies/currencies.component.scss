@@ -1,0 +1,37 @@
+:host {
+  .card {
+    margin-bottom: 2rem;
+  }
+
+  .card-header {
+    font-weight: 500;
+  }
+
+  .currencies-list {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+
+    .list-group-item {
+      &:hover {
+        background-color: rgba(var(--primary), 0.05);
+      }
+
+      &.active {
+        background-color: var(--primary);
+        border-color: var(--primary);
+
+        .badge {
+          background-color: white !important;
+          color: var(--primary);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .col-md-6:last-child {
+      margin-top: 1.5rem;
+    }
+  }
+}

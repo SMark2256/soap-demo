@@ -1,0 +1,56 @@
+:host {
+  .card {
+    margin-bottom: 2rem;
+  }
+
+  .card-header {
+    font-weight: 500;
+  }
+
+  .languages-list {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+
+    .list-group-item {
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        background-color: rgba(var(--primary), 0.05);
+      }
+
+      &.active {
+        background-color: var(--primary);
+        border-color: var(--primary);
+
+        .badge {
+          background-color: white !important;
+          color: var(--primary);
+        }
+      }
+    }
+  }
+
+  .badge {
+    transition: all .2s ease-in-out;
+  }
+
+  .input-group {
+    .input-group-text {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(var(--primary), 0.25);
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .col-md-6:last-child {
+      margin-top: 1.5rem;
+    }
+  }
+}
