@@ -1,107 +1,112 @@
+# SOAP API Demo Application
 
-# SOAP API Demó Alkalmazás
+This project demonstrates an application that integrates SOAP web services using Angular (frontend) and NestJS (backend). The application utilizes various SOAP services, including calculator operations, country information, currency data, and language listings.
 
-Ez a projekt egy SOAP webszolgáltatásokat integráló alkalmazást mutat be Angular (frontend) és NestJS (backend) technológiákkal. Az alkalmazás különböző SOAP szolgáltatásokat használ, beleértve számológép műveleteket, országinformációkat, valuta adatokat és nyelvlistázást.
+## Features
 
-## Funkciók
+* Calculator with basic arithmetic operations
+* Country information browser with details (capital, currency, flag)
+* Currency listing and details
+* Language listing and filtering
 
-- Számológép alapvető aritmetikai műveletekkel
-- Országinformációs böngésző részletekkel (főváros, valuta, zászló)
-- Valuta listázás és részletek
-- Nyelvek listázása és szűrése
+## Prerequisites
 
-## Előfeltételek
+Before you begin, make sure the following are installed:
 
-Mielőtt elkezdenéd, győződj meg róla, hogy a következők telepítve vannak:
-- [Node.js](https://nodejs.org/) (v18 vagy újabb)
-- [npm](https://www.npmjs.com/) (v9 vagy újabb)
+* [Node.js](https://nodejs.org/) (v18 or later)
+* [npm](https://www.npmjs.com/) (v9 or later)
 
-## Kezdeti lépések
+## Getting Started
 
-### 1. lépés: Projekt klónozása
+### Step 1: Clone the Project
 
 ```bash
 git clone <repository-url>
 cd soap-demo
 ```
 
-### 2. lépés: Backend beállítása
+### Step 2: Backend Setup
 
-1. Navigálj a backend könyvtárba:
+1. Navigate to the backend directory:
+
    ```bash
    cd backend
    ```
 
-2. Függőségek telepítése:
+2. Install dependencies:
+
    ```bash
    npm install
    ```
 
-3. Backend szerver indítása:
+3. Start the backend server:
+
    ```bash
    npm run start:dev
    ```
 
-   A backend elérhető lesz a http://localhost:3000 címen
+   The backend will be available at http://localhost:3000
 
-### 3. lépés: Frontend beállítása
+### Step 3: Frontend Setup
 
-1. Nyiss egy új terminált és navigálj a projekt gyökérkönyvtárába
+1. Open a new terminal and navigate to the project root directory.
 
-2. Függőségek telepítése:
+2. Install dependencies:
+
    ```bash
    npm install
    ```
 
-3. Frontend fejlesztői szerver indítása:
+3. Start the frontend development server:
+
    ```bash
    npm start
    ```
 
-   Az alkalmazás elérhető lesz a http://localhost:4200 címen
+   The application will be available at http://localhost:4200
 
-## Alkalmazás szerkezete
+## Application Structure
 
 ### Backend (NestJS)
 
-A backend különböző modulokra van osztva, amelyek különböző SOAP szolgáltatásokkal integrálódnak:
+The backend is divided into different modules that integrate with various SOAP services:
 
-- **Calculator Modul**: Kapcsolódik egy számológép SOAP szolgáltatáshoz
-- **Countries Modul**: Országinformációkat szolgáltat egy SOAP szolgáltatásból
-- **Currencies Modul**: Valuta adatokat kér le egy SOAP szolgáltatásból
-- **Languages Modul**: Nyelvi információkat kap egy SOAP szolgáltatásból
+* **Calculator Module**: Connects to a calculator SOAP service
+* **Countries Module**: Provides country information from a SOAP service
+* **Currencies Module**: Retrieves currency data from a SOAP service
+* **Languages Module**: Obtains language information from a SOAP service
 
 ### Frontend (Angular)
 
-A frontend Angular-rel készült és komponens alapú architektúrát használ:
+The frontend is built with Angular and follows a component-based architecture:
 
-- **Calculator Komponens**: Felhasználói felület számítások elvégzéséhez
-- **Countries Komponens**: Felület országinformációk böngészéséhez
-- **Currencies Komponens**: Valuta adatok megjelenítése
-- **Languages Komponens**: Nyelvek listázása és szűrése
+* **Calculator Component**: User interface for performing calculations
+* **Countries Component**: Interface for browsing country information
+* **Currencies Component**: Displays currency data
+* **Languages Component**: Lists and filters languages
 
-## Környezeti konfiguráció
+## Environment Configuration
 
 ### Backend
 
-A környezeti változók a backend könyvtárban található `.env` fájlban vannak tárolva:
+Environment variables are stored in the `.env` file located in the backend directory:
 
-```
+```env
 PORT=3000
 HOST=localhost
 ENABLE_CORS=true
 ```
 
-Ha nincs `.env` fájl, az alkalmazás alapértelmezetten a localhost:3000 címet használja.
+If no `.env` file is present, the application will use `localhost:3000` by default.
 
-### Frontend (Jelenleg nincs implementálva)
+### Frontend (Currently Not Implemented)
 
-A környezeti konfiguráció a `src/environments` könyvtárban található:
+Environment configuration files are located in the `src/environments` directory:
 
-- `environment.ts`: Fejlesztési környezet beállításai
-- `environment.prod.ts`: Éles környezet beállításai
+* `environment.ts`: Development environment settings
+* `environment.prod.ts`: Production environment settings
 
-## Éles környezetbe való telepítés
+## Production Deployment
 
 ### Backend
 
@@ -117,22 +122,22 @@ npm run start:prod
 npm run build
 ```
 
-A lefordított frontend a `dist/soap` könyvtárban lesz, készen arra, hogy webszerverre telepítsék.
+The compiled frontend will be generated in the `dist/soap` directory, ready to be deployed to a web server.
 
-## Hibaelhárítás
+## Troubleshooting
 
-### SOAP szolgáltatás kapcsolódási problémák
+### SOAP Service Connection Issues
 
-Ha problémákat tapasztalsz a SOAP szolgáltatásokhoz való kapcsolódáskor:
+If you experience problems connecting to SOAP services:
 
-1. Ellenőrizd az internetkapcsolatot
-2. Ellenőrizd, hogy a SOAP végpontok elérhetőek-e
-3. Nézd meg a backend naplókat részletes hibaüzenetekért
+1. Check your internet connection.
+2. Verify that the SOAP endpoints are accessible.
+3. Review the backend logs for detailed error messages.
 
-### API kapcsolódási problémák
+### API Connection Issues
 
-Ha a frontend nem tud kapcsolódni a backendhez:
+If the frontend cannot connect to the backend:
 
-1. Győződj meg róla, hogy a backend szerver fut
-2. Ellenőrizd, hogy a frontend környezeti konfigurációjában lévő API URL megegyezik a backend URL-jével
-3. Ellenőrizd, hogy a CORS engedélyezve van-e a backenden
+1. Make sure the backend server is running.
+2. Verify that the API URL configured in the frontend environment matches the backend URL.
+3. Ensure that CORS is enabled on the backend.
